@@ -1,5 +1,7 @@
 # Exercises:
 # 1. Added each_with_index to print method, to print number before name.
+# 2. Print only the students whose name begins with a specific letter.
+
 def input_students
   puts "Please enter the names of the students."
   puts "To finish, just hit return twice."
@@ -24,7 +26,7 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print_all(students)
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
@@ -33,8 +35,22 @@ end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students."
 end
+
+# Print only the students whose name begins with a specific letter:
+def print_starts_with_letter(students)
+  puts "Please type a letter to print the students whose names begin with that letter"
+  letter = gets.chomp.downcase
+  puts "These students' names begin with the letter #{letter}:"
+  students.each_with_index do |student, index|
+    if student[:name][0].downcase == letter
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
+
 students = input_students
 # Nothing happens until we call the methods
 print_header
-print(students)
+print_all(students)
 print_footer(students)
+print_starts_with_letter(students)
