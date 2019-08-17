@@ -2,6 +2,8 @@
 # 1. Added each_with_index to print method, to print number before name.
 # 2. Print only the students whose name begins with a specific letter.
 # 3. Print only the students whose name is shorter than 12 characters.
+# Rewrite the each() method that prints all students using while or until control flow methods (Loops).
+
 def input_students
   puts "Please enter the names of the students."
   puts "To finish, just hit return twice."
@@ -26,9 +28,13 @@ def print_header
   puts "-------------"
 end
 
+# Rewrite the each() method that prints all students using while or until control flow methods (Loops).
 def print_all(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  counter = 0
+  while true do
+    puts "#{(counter + 1)}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    counter += 1
+    break if counter == students.length
   end
 end
 
@@ -62,7 +68,7 @@ students = input_students
 
 # Nothing happens until we call the methods
 # print_header
-# print_all(students)
+print_all(students)
 # print_footer(students)
 # print_starts_with_letter(students)
-print_names_of_length_less_than_n(students)
+# print_names_of_length_less_than_n(students)
