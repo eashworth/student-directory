@@ -1,4 +1,3 @@
-# Exercises:
 # 1. Added each_with_index to print method, to print number before name.
 # 2. Print only the students whose name begins with a specific letter.
 # 3. Print only the students whose name is shorter than 12 characters.
@@ -39,15 +38,23 @@ def input_students
     name = "name unknown" if name.empty?
     puts "Please enter the cohort of that student."
     cohort = gets.chomp
+    input = cohort
+    cohort = confirm_input(cohort, input)
     cohort = "unknown" if cohort.empty?
     puts "Please enter that student's country of birth"
     country_of_birth = gets.chomp
+    input = country_of_birth
+    country_of_birth = confirm_input(country_of_birth, input)
     country_of_birth = "unknown" if country_of_birth.empty?
     puts "Please enter the hobbies of that student, separated by a comma and a space"
     hobbies = gets.chomp
+    input = hobbies
+    hobbies = confirm_input(hobbies, input)
     hobbies = "unknown" if hobbies.empty?
     puts "Please enter the height of that student"
     height = gets.chomp
+    input = height
+    height = confirm_input(height, input)
     height = "unknown" if height.empty?
     students << {
       name: name.to_sym,
