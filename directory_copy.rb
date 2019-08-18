@@ -9,12 +9,13 @@
 #    What if one of the values is empty? Can you supply a default value?
 #    The input will be given to you as a string. How will you convert it to a symbol?
 #    What if the user makes a typo?
+# 6. Research how the method center() of the String class works.
+#    Use it in your code to make the output beautifully aligned.
 
 # Confirm_input allows correction of typos.
 # If no input is desired (so that a default value is automatically assigned later),
 # the user must hit enter twice the FIRST time input is requested.
 # Once input has been given, giving "empty" input will confirm the input already given.
-
 def confirm_input(variable, input)
   while !(input.empty?) do
     puts "You typed #{variable}."
@@ -87,31 +88,36 @@ def input_students
   end
   students
 end
+
 def print_header
-  puts "The students of Makers Academy"
-  puts "-------------"
+  width = 120
+  puts "The students of Makers Academy".center(width)
+  puts "-------------".center(width)
 end
 
 # Rewrite the each() method that prints all students using while or until control flow methods (Loops).
 def print_all(students)
+  width = 120
   counter = 0
   while true do
     puts "#{(counter + 1)}. #{students[counter][:name]} "\
          "(#{students[counter][:cohort]} cohort, "\
          "country of birth: #{students[counter][:country_of_birth]}, "\
          "hobbies: #{students[counter][:hobbies]}, "\
-         "height: #{students[counter][:height]})"
+         "height: #{students[counter][:height]})".center(width)
     counter += 1
     break if counter == students.length
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students."
+  width = 120
+  puts "Overall, we have #{students.count} great students.".center(width)
 end
 
 # Print only the students whose name begins with a specific letter:
 def print_starts_with_letter(students)
+  width = 120
   puts "Please type a letter to print the students whose names begin with that letter"
   letter = gets.chomp.downcase
   students.each_with_index do |student, index|
@@ -120,13 +126,14 @@ def print_starts_with_letter(students)
            "(#{students[index][:cohort]} cohort, "\
            "country of birth: #{students[index][:country_of_birth]}, "\
            "hobbies: #{students[index][:hobbies]}, "\
-           "height: #{students[index][:height]})"
+           "height: #{students[index][:height]})".center(width)
     end
   end
 end
 
 # Print only the students whose name is shorter than 12 characters:
 def print_names_of_length_less_than_n(students)
+  width = 120
   puts "To print students whose names are shorter than a certain length, please type a number."
   name_length = gets.chomp.downcase.to_i
   students.each_with_index do |student, index|
@@ -135,7 +142,7 @@ def print_names_of_length_less_than_n(students)
            "(#{students[index][:cohort]} cohort, "\
            "country of birth: #{students[index][:country_of_birth]}, "\
            "hobbies: #{students[index][:hobbies]}, "\
-           "height: #{students[index][:height]})"
+           "height: #{students[index][:height]})".center(width)
     end
   end
 end
@@ -143,8 +150,8 @@ end
 students = input_students
 
 # Nothing happens until we call the methods
-# print_header
+print_header
 print_all(students)
-# print_footer(students)
-# print_starts_with_letter(students)
-# print_names_of_length_less_than_n(students)
+print_footer(students)
+print_starts_with_letter(students)
+print_names_of_length_less_than_n(students)
