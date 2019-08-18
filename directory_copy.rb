@@ -155,6 +155,7 @@ def print_names_of_length_less_than_n(students)
 end
 
 def print_by_cohort(students)
+  width = 120
   sorted_by_cohort = {}
   students.each do |student|
     cohort = student[:cohort]
@@ -165,7 +166,7 @@ def print_by_cohort(students)
     sorted_by_cohort[cohort].push(student[:name])
   end
   sorted_by_cohort.each do |cohort, names|
-    puts "#{cohort} cohort: #{names.join(", ")}"
+    puts "#{cohort} cohort: #{names.join(", ")}".center(width)
   end
 end
 
