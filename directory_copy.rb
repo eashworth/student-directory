@@ -11,6 +11,11 @@
 #    The input will be given to you as a string. How will you convert it to a symbol?
 #    What if the user makes a typo?
 
+# Confirm_input allows correction of typos.
+# If no input is desired (so that a default value is automatically assigned later),
+# the user must hit enter twice the FIRST time input is requested.
+# Once input has been given, giving "empty" input will confirm the input already given.
+
 def confirm_input(variable, input)
   while !(input.empty?) do
     puts "You typed #{variable}."
