@@ -27,35 +27,54 @@ def confirm_input(variable, input)
   end
   variable
 end
-def input_students
+def get_cohort
+  puts "Please enter the cohort of that student."
+  cohort = gets.chomp
+  input = cohort
+  cohort = confirm_input(cohort, input)
+  cohort = "unknown" if cohort.empty?
+  cohort
+end
+def get_country_of_birth
+  puts "Please enter that student's country of birth"
+  country_of_birth = gets.chomp
+  input = country_of_birth
+  country_of_birth = confirm_input(country_of_birth, input)
+  country_of_birth = "unknown" if country_of_birth.empty?
+  country_of_birth
+end
+def get_hobbies
+  puts "Please enter the hobbies of that student, separated by a comma and a space"
+  hobbies = gets.chomp
+  input = hobbies
+  hobbies = confirm_input(hobbies, input)
+  hobbies = "unknown" if hobbies.empty?
+  hobbies
+end
+def get_height
+  puts "Please enter the height of that student"
+  height = gets.chomp
+  input = height
+  height = confirm_input(height, input)
+  height = "unknown" if height.empty?
+  height
+end
+def get_name
   puts "Please enter the name of a student, or type stop to finish."
-  students = []
   name = gets.chomp
   input = name
   name = confirm_input(name, input)
-
+  name = "name unknown" if name.empty?
+  name
+end
+def input_students
+  students = []
+  name = get_name
   while !(name == "stop") do
-    name = "name unknown" if name.empty?
-    puts "Please enter the cohort of that student."
-    cohort = gets.chomp
-    input = cohort
-    cohort = confirm_input(cohort, input)
-    cohort = "unknown" if cohort.empty?
-    puts "Please enter that student's country of birth"
-    country_of_birth = gets.chomp
-    input = country_of_birth
-    country_of_birth = confirm_input(country_of_birth, input)
-    country_of_birth = "unknown" if country_of_birth.empty?
-    puts "Please enter the hobbies of that student, separated by a comma and a space"
-    hobbies = gets.chomp
-    input = hobbies
-    hobbies = confirm_input(hobbies, input)
-    hobbies = "unknown" if hobbies.empty?
-    puts "Please enter the height of that student"
-    height = gets.chomp
-    input = height
-    height = confirm_input(height, input)
-    height = "unknown" if height.empty?
+    cohort = get_cohort
+    country_of_birth = get_country_of_birth
+    hobbies = get_hobbies
+    height = get_height
     students << {
       name: name.to_sym,
       cohort: cohort.to_sym,
