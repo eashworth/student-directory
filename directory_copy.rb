@@ -23,6 +23,14 @@
 #    whereas it should be "Now we have 1 student".
 #    How can you fix it so that it used singular form when appropriate
 #    and plural form otherwise?
+# 10.We've been using the chomp() method to get rid of the last return character.
+#    Find another method among those provided by the String class
+#    that could be used for the same purpose
+#    (although it will require passing some arguments).
+# 12.What happens if the user doesn't enter any students?
+#    It will try to print an empty list.
+#    How can you use an if statement (Control Flow)
+#    to only print the list if there is at least one student in there?
 
 # Confirm_input allows correction of typos.
 # If no input is desired (so that a default value is automatically assigned later),
@@ -105,17 +113,21 @@ def input_students
   students
 end
 
-def print_header
-  width = 120
-  puts "The students of Makers Academy".center(width)
-  puts "-------------".center(width)
+def print_header(students)
+  if students.empty?
+    # do nothing
+  else
+    width = 120
+    puts "The students of Makers Academy".center(width)
+    puts "-------------".center(width)
+  end
 end
 
-# Rewrite the each() method that prints all students using while or until control flow methods (Loops).
 def print_all(students)
   width = 120
   counter = 0
   while true do
+    break if students.empty? # do nothing
     puts "#{(counter + 1)}. #{students[counter][:name]} "\
          "(#{students[counter][:cohort]} cohort, "\
          "country of birth: #{students[counter][:country_of_birth]}, "\
@@ -128,64 +140,76 @@ end
 
 def print_footer(students)
   width = 120
-  if students.count == 1
+  if students.empty?
+    # do nothing
+  elsif students.count == 1
     puts "Overall, we have one great student.".center(width)
   else
     puts "Overall, we have #{students.count} great students.".center(width)
   end
 end
 
-# Print only the students whose name begins with a specific letter:
 def print_starts_with_letter(students)
-  width = 120
-  puts "Please type a letter to print the students whose names begin with that letter"
-  letter = gets.chomp.downcase
-  students.each_with_index do |student, index|
-    if student[:name][0].downcase == letter
-      puts "#{index + 1}. #{students[index][:name]} "\
-           "(#{students[index][:cohort]} cohort, "\
-           "country of birth: #{students[index][:country_of_birth]}, "\
-           "hobbies: #{students[index][:hobbies]}, "\
-           "height: #{students[index][:height]})".center(width)
+  if students.empty?
+    # do nothing
+  else
+    width = 120
+    puts "Please type a letter to print the students whose names begin with that letter"
+    letter = gets.chomp.downcase
+    students.each_with_index do |student, index|
+      if student[:name][0].downcase == letter
+        puts "#{index + 1}. #{students[index][:name]} "\
+             "(#{students[index][:cohort]} cohort, "\
+             "country of birth: #{students[index][:country_of_birth]}, "\
+             "hobbies: #{students[index][:hobbies]}, "\
+             "height: #{students[index][:height]})".center(width)
+      end
     end
   end
 end
 
-# Print only the students whose name is shorter than 12 characters:
 def print_names_of_length_less_than_n(students)
-  width = 120
-  puts "To print students whose names are shorter than a certain length, please type a number."
-  name_length = gets.chomp.downcase.to_i
-  students.each_with_index do |student, index|
-    if student[:name].length < name_length
-      puts "#{index + 1}. #{students[index][:name]} "\
-           "(#{students[index][:cohort]} cohort, "\
-           "country of birth: #{students[index][:country_of_birth]}, "\
-           "hobbies: #{students[index][:hobbies]}, "\
-           "height: #{students[index][:height]})".center(width)
+  if students.empty?
+    # do nothing
+  else
+    width = 120
+    puts "To print students whose names are shorter than a certain length, please type a number."
+    name_length = gets.chomp.downcase.to_i
+    students.each_with_index do |student, index|
+      if student[:name].length < name_length
+        puts "#{index + 1}. #{students[index][:name]} "\
+             "(#{students[index][:cohort]} cohort, "\
+             "country of birth: #{students[index][:country_of_birth]}, "\
+             "hobbies: #{students[index][:hobbies]}, "\
+             "height: #{students[index][:height]})".center(width)
+      end
     end
   end
 end
 
 def print_by_cohort(students)
-  width = 120
-  sorted_by_cohort = {}
-  students.each do |student|
-    cohort = student[:cohort]
-    name = student[:name]
-    if sorted_by_cohort[cohort] == nil
-      sorted_by_cohort[cohort] = []
+  if students.empty?
+    #do nothing
+  else
+    width = 120
+    sorted_by_cohort = {}
+    students.each do |student|
+      cohort = student[:cohort]
+      name = student[:name]
+      if sorted_by_cohort[cohort] == nil
+        sorted_by_cohort[cohort] = []
+      end
+      sorted_by_cohort[cohort].push(student[:name])
     end
-    sorted_by_cohort[cohort].push(student[:name])
-  end
-  sorted_by_cohort.each do |cohort, names|
-    puts "#{cohort} cohort: #{names.join(", ")}".center(width)
+    sorted_by_cohort.each do |cohort, names|
+      puts "#{cohort} cohort: #{names.join(", ")}".center(width)
+    end
   end
 end
 
 students = input_students
 
-print_header
+print_header(students)
 print_all(students)
 print_footer(students)
 # print_starts_with_letter(students)
