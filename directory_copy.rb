@@ -18,6 +18,11 @@
 #    iterate over it and only print the students from that cohort.
 #    I think this means print all students grouped by cohort
 #    (as opposed to just printing one cohort).
+# 9. Right now if we have only one student,
+#    the user will see a message "Now we have 1 students",
+#    whereas it should be "Now we have 1 student".
+#    How can you fix it so that it used singular form when appropriate
+#    and plural form otherwise?
 
 # Confirm_input allows correction of typos.
 # If no input is desired (so that a default value is automatically assigned later),
@@ -90,7 +95,11 @@ def input_students
       hobbies: hobbies.to_sym,
       height: height.to_sym
     }
-    puts "Now we have #{students.count} students - add another or type 'stop'"
+    if students.count == 1
+      puts "Now we have one student - add another or type 'stop'"
+    else
+      puts "Now we have #{students.count} students - add another or type 'stop'"
+    end
     name = get_name
   end
   students
@@ -119,7 +128,11 @@ end
 
 def print_footer(students)
   width = 120
-  puts "Overall, we have #{students.count} great students.".center(width)
+  if students.count == 1
+    puts "Overall, we have one great student.".center(width)
+  else
+    puts "Overall, we have #{students.count} great students.".center(width)
+  end
 end
 
 # Print only the students whose name begins with a specific letter:
@@ -172,9 +185,9 @@ end
 
 students = input_students
 
-# print_header
-# print_all(students)
-# print_footer(students)
+print_header
+print_all(students)
+print_footer(students)
 # print_starts_with_letter(students)
 # print_names_of_length_less_than_n(students)
-print_by_cohort(students)
+# print_by_cohort(students)
