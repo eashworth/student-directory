@@ -11,6 +11,13 @@
 #    What if the user makes a typo?
 # 6. Research how the method center() of the String class works.
 #    Use it in your code to make the output beautifully aligned.
+# 8. Once you complete the previous exercise,
+#    change the way the users are displayed: print them grouped by cohorts.
+#    To do this, you'll need to get a list of all existing cohorts
+#    (the map() method may be useful but it's not the only option),
+#    iterate over it and only print the students from that cohort.
+#    I think this means print all students grouped by cohort
+#    (as opposed to just printing one cohort).
 
 # Confirm_input allows correction of typos.
 # If no input is desired (so that a default value is automatically assigned later),
@@ -84,7 +91,7 @@ def input_students
       height: height.to_sym
     }
     puts "Now we have #{students.count} students - add another or type 'stop'"
-    name = gets.chomp
+    name = get_name
   end
   students
 end
@@ -147,11 +154,26 @@ def print_names_of_length_less_than_n(students)
   end
 end
 
+def print_by_cohort(students)
+  sorted_by_cohort = {}
+  students.each do |student|
+    cohort = student[:cohort]
+    name = student[:name]
+    if sorted_by_cohort[cohort] == nil
+      sorted_by_cohort[cohort] = []
+    end
+    sorted_by_cohort[cohort].push(student[:name])
+  end
+  sorted_by_cohort.each do |cohort, names|
+    puts "#{cohort} cohort: #{names.join(", ")}"
+  end
+end
+
 students = input_students
 
-# Nothing happens until we call the methods
-print_header
-print_all(students)
-print_footer(students)
-print_starts_with_letter(students)
-print_names_of_length_less_than_n(students)
+# print_header
+# print_all(students)
+# print_footer(students)
+# print_starts_with_letter(students)
+# print_names_of_length_less_than_n(students)
+print_by_cohort(students)
